@@ -12,8 +12,8 @@ var plugins = require('load-deps')('gulp-*', {
 
 function logErrors(stream) {
   stream.on('error', function logError(err) {
-    err.message && console.error(err.message);
-    err.stack && console.error(err.stack);
+    if (err.message) console.error(err.message);
+    if (err.stack) console.error(err.stack);
   });
 }
 
@@ -35,8 +35,8 @@ var LINT_OTHER = [__filename, SPIKES + '/**.js'];
 var TESTS = [SRC + '/**/*.test.js'];
 var MOCHA_OPTS = {
   require: [
-    __dirname + '/' + DEST + '/setup.js',
     __dirname + '/test/setup.js',
+    __dirname + '/' + DEST + '/setup.js',
   ],
   reporter: 'spec',
 };
